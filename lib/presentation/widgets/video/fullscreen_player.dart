@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toktik/presentation/widgets/video/video_background.dart';
 import 'package:video_player/video_player.dart';
 
 class FullscreenPlayer extends StatefulWidget {
@@ -44,20 +45,32 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
             child: CircularProgressIndicator(),
           );
         }
-        return AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: Stack(children: [
-            VideoPlayer(controller),
+        return GestureDetector(
+          onTap: () {
+            if (controller.value.isPlaying) {
+              controller.pause();
+              return;
+            }
+            controller.play();
+          },
+          child: AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: Stack(children: [
+              VideoPlayer(controller),
 
-            //gradiente
+              //gradiente
+              const VideoBackground(
+                stops: [0.8, 1.0],
+              ),
 
-            //Texto
-            Positioned(
-              bottom: 50,
-              left: 20,
-              child: _VideCaption(caption: widget.caption),
-            ),
-          ]),
+              //Texto
+              Positioned(
+                bottom: 50,
+                left: 20,
+                child: _VideCaption(caption: widget.caption),
+              ),
+            ]),
+          ),
         );
       },
     );
@@ -68,7 +81,6 @@ class _VideCaption extends StatelessWidget {
   final String caption;
 
   const _VideCaption({
-    super.key,
     required this.caption,
   });
 

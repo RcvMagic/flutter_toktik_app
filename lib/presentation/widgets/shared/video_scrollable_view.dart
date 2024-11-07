@@ -24,8 +24,9 @@ class VideoScrollableView extends StatelessWidget {
           children: [
             SizedBox.expand(
                 child: FullscreenPlayer(
-              caption: videoPost.caption,
-              videoUrl: videoPost.videoUrl,
+              caption: videoPost.caption, videoUrl: videoPost.videoUrl,
+              //child: FullscreenPlayer(caption: videoPost.caption, videoUrl: videoPost.videoUrl,
+              //
             )),
             Positioned(
               bottom: 40,
