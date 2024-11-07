@@ -39,10 +39,51 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
     return FutureBuilder(
       future: controller.initialize(),
       builder: (context, snapshot) {
-        return const Center(
-          child: CircularProgressIndicator(),
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return AspectRatio(
+          aspectRatio: controller.value.aspectRatio,
+          child: Stack(children: [
+            VideoPlayer(controller),
+
+            //gradiente
+
+            //Texto
+            Positioned(
+              bottom: 50,
+              left: 20,
+              child: _VideCaption(caption: widget.caption),
+            ),
+          ]),
         );
       },
+    );
+  }
+}
+
+class _VideCaption extends StatelessWidget {
+  final String caption;
+
+  const _VideCaption({
+    super.key,
+    required this.caption,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final titleStyle = Theme.of(context).textTheme.titleLarge;
+
+    return SizedBox(
+      width: size.width * 0.6,
+      child: Text(
+        caption,
+        maxLines: 2,
+        style: titleStyle,
+      ),
     );
   }
 }
