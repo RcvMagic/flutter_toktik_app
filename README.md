@@ -4,6 +4,9 @@ A new Flutter project.
 
 ## Getting Started
 
+Crear la carpeta assets/videos en la raiz de la app e insertar los videos 
+mp4 descargados del curso
+
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
